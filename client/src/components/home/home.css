@@ -1,0 +1,38 @@
+.picture-added-hotel {
+    width: 200px;
+    height: 150px;
+    border-radius: 50%;
+}
+
+.picture-added-hotel:hover {
+    cursor: pointer;
+    
+}
+
+.background-img {
+    background-size: cover;
+    margin: auto;
+    min-height: 500px;
+}
+
+.added-hotels {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.added-hotel {
+    color: black;
+    cursor: pointer;
+    width: 400px;
+    border: 2px solid blue;
+    text-align: center;
+    background: cornflowerblue;
+    padding-bottom: 10px;
+    border-radius: 10px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    margin-top: 10px;
+    height: 250px;
+    flex-basis: 25%;
+}

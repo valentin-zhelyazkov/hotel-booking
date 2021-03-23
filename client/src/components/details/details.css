@@ -1,0 +1,62 @@
+.hotel-ticket {
+    text-align: left;
+    font-size: 15px;
+    width: 100%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.hotel-left img {
+    width: 400px;
+    height: 70%;
+    padding: 0 0 0 15px;
+}
+
+.hotel-right {
+    padding-left: 20px;
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.book {
+    list-style-type: none;
+    display: inline-block;
+    border: 2px solid lightsteelblue;
+    padding: 10px;
+    margin: 10px;
+    width: 140px;
+    text-align: center;
+    color: blue;
+    background: none;
+}
+
+.edit {
+    list-style-type: none;
+    display: inline-block;
+    border: 2px solid lightsteelblue;
+    padding: 10px;
+    margin: 10px;
+    width: 140px;
+    text-align: center;
+    color: black;
+    background: none;
+}
+
+.remove {
+    list-style-type: none;
+    display: inline-block;
+    border: 2px solid lightsteelblue;
+    padding: 10px;
+    margin: 10px;
+    width: 140px;
+    text-align: center;
+    color: red;
+    background: none;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
