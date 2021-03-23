@@ -60,3 +60,8 @@ a {
     text-decoration: none;
     color: white;
 }
+
+h3 {
+    font-size: 22px;
+    margin-bottom: 0;
+}

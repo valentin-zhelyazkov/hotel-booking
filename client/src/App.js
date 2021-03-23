@@ -22,6 +22,7 @@ function App() {
           <Route path="/" exact component={Home} />
           <Route path="/add" exact component={AddHotel} />
           <Route path="/profile" exact component={Profile} />
+          <Route path="/details" exact component={Details} />
         </Switch>
         <Footer />
       </div>
