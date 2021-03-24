@@ -10,6 +10,7 @@
 }
 
 .background-img {
+    background: url("../../../src/images/hotel.jpg") no-repeat;
     background-size: cover;
     margin: auto;
     min-height: 500px;
