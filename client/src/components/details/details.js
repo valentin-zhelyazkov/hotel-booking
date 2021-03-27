@@ -1,4 +1,5 @@
 import './details.css';
+import { Link } from "react-router-dom";
 
 const details = () => {
     return (
@@ -19,9 +20,9 @@ const details = () => {
                     <p><span >Free rooms: 43</span> </p>
                     <p><span className="green">You already have booked a room</span> </p>
 
-                    <a href="" className="book">Book</a>
-                    <a href="" className="edit">Edit</a>
-                    <a href="" className="remove">Delete</a>
+                    <Link to="" className="book">Book</Link>
+                    <Link to="" className="edit">Edit</Link>
+                    <Link to="" className="remove">Delete</Link>
                 </div>
 
             </div>

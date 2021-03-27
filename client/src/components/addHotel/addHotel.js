@@ -3,7 +3,7 @@ import db from '../../database/db';
 import './addHotel.css'
 
 const AddHotel = memo(({
-
+    history
 }) => {
     const onHotelSubmit = (e) => {
         e.preventDefault();
@@ -14,6 +14,7 @@ const AddHotel = memo(({
                 freeRooms: e.target.freeRooms.value,
                 imageUrl: e.target.imgUrl.value            
         })
+        history.push('/');        
     }
 
 

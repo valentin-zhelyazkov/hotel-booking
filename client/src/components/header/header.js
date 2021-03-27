@@ -11,8 +11,8 @@ const header = () => {
                 </ul>
             </div>
             <div className="right-container">
-                <Link href="/profile" className="nav-btn">username</Link>
-                <Link href="" className="nav-btn">Logout</Link>
+                <Link to="/profile" className="nav-btn">username</Link>
+                <Link to="" className="nav-btn">Logout</Link>
             </div>
         </nav>
     );
