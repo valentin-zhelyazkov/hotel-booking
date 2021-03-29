@@ -2,7 +2,7 @@ import './register.css'
 import db from '../../database/db';
 
 const Register = (
-
+    history
 ) => {
     const onRegister = (e) => {
         e.preventDefault();
@@ -15,11 +15,10 @@ const Register = (
         db.auth().createUserWithEmailAndPassword(email, password)
         .then((userCredential) => {
           console.log(userCredential);
-          var email = userCredential.user.email;
-          var uid = userCredential.user.uid;
+          const uid = userCredential.user.uid;
           
-          localStorage.setItem(email , uid);
-          // ...
+          localStorage.setItem('uid', uid);
+          history.push('/');
         })
         .catch((error) => {
           console.error(error);

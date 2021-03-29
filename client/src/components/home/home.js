@@ -23,7 +23,7 @@ const Home = () => {
         fetchHotels();
     }, []);
 
-    console.log('render2');
+    
     return (
         <section id="viewCatalog" className="background-img">
             <div className="added-hotels">

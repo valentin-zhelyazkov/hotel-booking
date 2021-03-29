@@ -10,27 +10,49 @@ import AddHotel from './components/addHotel/addHotel';
 import Details from './components/details/details';
 import Edit from './components/edit/edit';
 import Profile from './components/profile/profile'
+import HeaderWhenNotLogged from './components/headerWhenNotLogged/headerWhenNotLogged';
 import './App.css';
 
 
 
 function App() {
-  return (
+  const isLogged = localStorage.getItem('uid');
+  if(isLogged){
+    return (
+      <Router>
+        <div className="App">
+          <Header />
+          <Switch>
+            <Route path="/" exact component={Home} />
+            <Route path="/add" exact component={AddHotel} />
+            <Route path="/profile" exact component={Profile} />
+            <Route path="/details" exact component={Details} />
+            <Route path="/login" exact component={Login} />
+            <Route path="/register" exact component={Register} />
+          </Switch>
+          <Footer />
+        </div>
+      </Router>
+    );
+  } else {
+    return (
     <Router>
-      <div className="App">
-        <Header />
-        <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/add" exact component={AddHotel} />
-          <Route path="/profile" exact component={Profile} />
-          <Route path="/details" exact component={Details} />
-          <Route path="/login" exact component={Login} />
-          <Route path="/register" exact component={Register} />
-        </Switch>
-        <Footer />
-      </div>
-    </Router>
-  );
+        <div className="App">
+          <HeaderWhenNotLogged />
+          <Switch>
+            <Route path="/" exact component={Home} />
+            <Route path="/add" exact component={AddHotel} />
+            <Route path="/profile" exact component={Profile} />
+            <Route path="/details" exact component={Details} />
+            <Route path="/login" exact component={Login} />
+            <Route path="/register" exact component={Register} />
+          </Switch>
+          <Footer />
+        </div>
+      </Router>
+      );
+  }
+  
 }
 
 export default App;
