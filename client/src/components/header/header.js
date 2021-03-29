@@ -1,7 +1,18 @@
 import './header.css';
 import { Link } from 'react-router-dom';
+import db from '../../database/db';
 
 const Header = () => {
+    const logout = (e) => {
+        e.preventDefault();
+        console.log("nice");
+        db.auth().signOut().then(() => {
+            localStorage.removeItem('uid');
+          }).catch((error) => {
+            console.error(error);
+          });
+        
+    }
     return (
         <nav>
             <div className="left-container">
@@ -12,7 +23,7 @@ const Header = () => {
             </div>
             <div className="right-container">
                 <Link to="/profile" className="nav-btn">username</Link>
-                <Link to="" className="nav-btn">Logout</Link>
+                <Link to="/logout" className="nav-btn" onClick={logout}>Logout</Link>
             </div>
         </nav>
     );
