@@ -24,6 +24,8 @@ function App() {
           <Route path="/add" exact component={AddHotel} />
           <Route path="/profile" exact component={Profile} />
           <Route path="/details" exact component={Details} />
+          <Route path="/login" exact component={Login} />
+          <Route path="/register" exact component={Register} />
         </Switch>
         <Footer />
       </div>

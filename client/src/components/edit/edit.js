@@ -1,6 +1,6 @@
 import './edit.css';
 
-const edit = () => {
+const Edit = () => {
     return (
         <section id="viewAddhotel">
             <h2>Edit existing hotel</h2>
@@ -20,4 +20,4 @@ const edit = () => {
     );
 };
 
-export default edit;
+export default Edit;

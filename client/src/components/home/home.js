@@ -12,7 +12,7 @@ const Home = () => {
         const response = db.firestore().collection('hotels');
         const data = await response.get();
 
-        console.log('fetch', hotels, data.docs);
+        
         setHotels([
             ...hotels,
             ...data.docs.map(hotel => hotel.data())

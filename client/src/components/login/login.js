@@ -1,6 +1,6 @@
 import './login.css'
 
-const login = () => {
+const Login = () => {
     return (
         <section id="viewLogin">
             <h2>Login:</h2>
@@ -15,4 +15,4 @@ const login = () => {
     );
 };
 
-export default login;
+export default Login;

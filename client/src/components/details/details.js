@@ -1,7 +1,7 @@
 import './details.css';
 import { Link } from "react-router-dom";
 
-const details = () => {
+const Details = () => {
     return (
         <section id="viewhotelDetails">
             <h2>Details</h2>
@@ -30,4 +30,4 @@ const details = () => {
     );
 }
 
-export default details;
+export default Details;
