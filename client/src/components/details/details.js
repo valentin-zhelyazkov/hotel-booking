@@ -17,6 +17,13 @@ const Details = (match) => {
             });
     }, []);
     
+    const onDelete = (e) => {
+        e.preventDefault();
+        db.firestore()
+        .collection('hotels')
+        .doc(hotelId)
+        .delete();
+    }
     return (
         <section id="viewhotelDetails">
             <h2>Details</h2>
@@ -34,7 +41,7 @@ const Details = (match) => {
                     <p><span className="green">You already have booked a room</span> </p>
                     <Link to="/book" className="book">Book</Link>
                     <Link to="/edit/:hotelId" className="edit">Edit</Link>
-                    <Link to="" className="remove/:hotelId">Delete</Link>
+                    <button className="button, remove" onClick={onDelete}>Delete</button>
                 </div>
             </div>
         </section>
