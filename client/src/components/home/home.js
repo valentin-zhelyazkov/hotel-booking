@@ -12,26 +12,26 @@ const Home = () => {
         const response = db.firestore().collection('hotels');
         const data = await response.get();
 
-        
-        setHotels([
-            ...hotels,
-            ...data.docs.map(hotel => hotel.data())
-        ]);
+        setHotels(data.docs.map(hotel => ({
+            id: hotel.id,
+            ...hotel.data()
+        })));
     }
 
     useEffect(() => {
         fetchHotels();
     }, []);
-
+    
+    console.log(hotels)
     
     return (
         <section id="viewCatalog" className="background-img">
             <div className="added-hotels">
-            {hotels.map((x, index) => (          
-                <Link to="/details" key={index} className="added-hotel">
-                    <img src={x.imageUrl} alt="" className="picture-added-hotel" />
-                    <h3>{x.city}</h3>
-                    <span>Free rooms: {x.freeRooms}</span>                   
+            {hotels.map((hotel, index) => (          
+                <Link to={`/details/${hotel.id}`} key={index} className="added-hotel">
+                    <img src={hotel.imageUrl} alt="" className="picture-added-hotel" />
+                    <h3>{hotel.city}</h3>
+                    <span>Free rooms: {hotel.freeRooms}</span>                   
                 </Link>
             ))}         
             </div>

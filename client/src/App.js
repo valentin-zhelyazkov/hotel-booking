@@ -1,6 +1,6 @@
-import {  BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import React from 'react';
+import React, { Fragment, useState } from 'react';
 import Header from './components/header/header';
 import Home from './components/home/home';
 import Footer from './components/footer/footer';
@@ -13,47 +13,31 @@ import Profile from './components/profile/profile'
 import HeaderWhenNotLogged from './components/headerWhenNotLogged/headerWhenNotLogged';
 import './App.css';
 
-
-
-
 function App() {
-  const isLogged = localStorage.getItem('uid');
-  if(isLogged){
-    return (
-      <Router>
-        <div className="App">
-          <Header />
-          <Switch>
-            <Route path="/" exact component={Home} />
-            <Route path="/add" exact component={AddHotel} />
-            <Route path="/profile" exact component={Profile} />
-            <Route path="/details" exact component={Details} />
-            <Route path="/login" exact component={Login} />
-            <Route path="/register" exact component={Register} />
-          </Switch>
-          <Footer />
-        </div>
-      </Router>
-    );
-  } else {
-    return (
+  const [isLogged, setIsLogged] = useState(localStorage.getItem('uid'));
+
+  return (
     <Router>
-        <div className="App">
-          <HeaderWhenNotLogged />
-          <Switch>
-            <Route path="/" exact component={Home} />
-            <Route path="/add" exact component={AddHotel} />
-            <Route path="/profile" exact component={Profile} />
-            <Route path="/details" exact component={Details} />
-            <Route path="/login" exact component={Login} />
-            <Route path="/register" exact component={Register} />
-          </Switch>
-          <Footer />
-        </div>
-      </Router>
-      );
-  }
-  
+      <div className="App">
+        {isLogged ? <Header /> : <HeaderWhenNotLogged />}
+        <Switch>
+          <Route path="/" exact component={Home} />
+          {isLogged ?
+            <Fragment>
+              <Route path="/add" exact component={AddHotel} />
+              <Route path="/profile" exact component={Profile} />
+              <Route path="/details/:hotelId" exact component={Details} />
+            </Fragment> :
+            <Fragment>
+              <Route path="/login" exact component={Login} />
+              <Route path="/register" exact component={Register} />
+            </Fragment>
+          }
+        </Switch>
+        <Footer />
+      </div>
+    </Router>
+  );
 }
 
 export default App;

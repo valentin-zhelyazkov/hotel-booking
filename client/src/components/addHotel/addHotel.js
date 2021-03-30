@@ -7,12 +7,13 @@ const AddHotel = memo(({
 }) => {
     const onHotelSubmit = (e) => {
         e.preventDefault();
-
+        const uid = localStorage.getItem('uid');
         db.firestore().collection("hotels").add({           
-                hotelName: e.target.hotel.value,
-                city: e.target.city.value,
-                freeRooms: e.target.freeRooms.value,
-                imageUrl: e.target.imgUrl.value            
+            hotelName: e.target.hotel.value,
+            city: e.target.city.value,
+            freeRooms: e.target.freeRooms.value,
+            imageUrl: e.target.imgUrl.value,
+            userId: uid,
         })
         history.push('/');        
     }

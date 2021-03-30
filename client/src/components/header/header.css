@@ -39,4 +39,5 @@ a {
 .nav-btn:hover {
     color: red;
     transform: scale(1.1);
+    cursor: pointer;
 }

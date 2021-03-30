@@ -3,15 +3,12 @@ import { Link } from 'react-router-dom';
 import db from '../../database/db';
 
 const Header = () => {
-    const logout = (e) => {
-        e.preventDefault();
-        console.log("nice");
+    const logout = () => {
         db.auth().signOut().then(() => {
             localStorage.removeItem('uid');
           }).catch((error) => {
             console.error(error);
-          });
-        
+          });     
     }
     return (
         <nav>
@@ -23,7 +20,7 @@ const Header = () => {
             </div>
             <div className="right-container">
                 <Link to="/profile" className="nav-btn">username</Link>
-                <Link to="/logout" className="nav-btn" onClick={logout}>Logout</Link>
+                <div className="nav-btn" onClick={logout}>Logout</div>
             </div>
         </nav>
     );

@@ -1,7 +1,18 @@
+import { useEffect } from 'react';
 import './details.css';
 import { Link } from "react-router-dom";
+import db from '../../database/db';
 
-const Details = () => {
+const Details = ( match ) => {
+    useEffect(() => {
+        console.log('details');
+        db.firestore().collection('hotels').get().then(x => {
+            x.docs.forEach(a => {
+                console.log(a.id);
+            })
+        });
+    }, []);
+    
     return (
         <section id="viewhotelDetails">
             <h2>Details</h2>
@@ -19,12 +30,10 @@ const Details = () => {
                     </div>
                     <p><span >Free rooms: 43</span> </p>
                     <p><span className="green">You already have booked a room</span> </p>
-
-                    <Link to="" className="book">Book</Link>
-                    <Link to="" className="edit">Edit</Link>
-                    <Link to="" className="remove">Delete</Link>
+                    <Link to="/book" className="book">Book</Link>
+                    <Link to="/edit/:hotelId" className="edit">Edit</Link>
+                    <Link to="" className="remove/:hotelId">Delete</Link>
                 </div>
-
             </div>
         </section>
     );
