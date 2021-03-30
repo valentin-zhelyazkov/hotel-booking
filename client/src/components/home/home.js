@@ -22,7 +22,7 @@ const Home = () => {
         fetchHotels();
     }, []);
     
-    console.log(hotels)
+   
     
     return (
         <section id="viewCatalog" className="background-img">
