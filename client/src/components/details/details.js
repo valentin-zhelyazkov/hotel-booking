@@ -29,8 +29,7 @@ const Details = (match) => {
             <h2>Details</h2>
             <div className="hotel-ticket">
                 <div className="hotel-left">
-                    <img src={hotel.imageUrl}
-                        alt="" />
+                    <img src={hotel.imageUrl} alt="" />
                 </div>
                 <div className="hotel-right">
                     <div>
@@ -40,7 +39,7 @@ const Details = (match) => {
                     <p><span >Free rooms: {hotel.freeRooms}</span> </p>
                     <p><span className="green">You already have booked a room</span> </p>
                     <Link to="/book" className="book">Book</Link>
-                    <Link to="/edit/:hotelId" className="edit">Edit</Link>
+                    <Link to={`/edit/${hotelId}`} className="edit">Edit</Link>
                     <button className="button, remove" onClick={onDelete}>Delete</button>
                 </div>
             </div>

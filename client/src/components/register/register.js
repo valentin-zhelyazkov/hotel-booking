@@ -1,9 +1,8 @@
 import './register.css'
 import db from '../../database/db';
+import { withRouter } from 'react-router-dom';
 
-const Register = (
-    history
-) => {
+const Register = ( { history } ) => {
     const onRegister = (e) => {
         e.preventDefault();
         const email = e.target.email.value;
@@ -14,17 +13,16 @@ const Register = (
         }
         db.auth().createUserWithEmailAndPassword(email, password)
         .then((userCredential) => {
-          console.log(userCredential);
-          const uid = userCredential.user.uid;
-          
-          localStorage.setItem('uid', uid);
-          history.push('/');
+          const uid = userCredential.user.uid;         
+          localStorage.setItem('uid', uid);   
+          history.push('/');       
         })
         .catch((error) => {
           console.error(error);
         });
     };
 
+    
     return (
         <section id="viewRegister">
             <h2>Create your account:</h2>
@@ -41,4 +39,4 @@ const Register = (
     );
 }
 
-export default Register;
+export default withRouter(Register);

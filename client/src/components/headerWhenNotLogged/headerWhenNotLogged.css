@@ -8,11 +8,6 @@ nav {
     padding-top: 0;
 }
 
-a {
-    text-decoration: none;
-    color: white;
-}
-
 .left-container > ul {
     display: flex;
     text-align: center;

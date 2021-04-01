@@ -1,11 +1,12 @@
 import './header.css';
-import { Link } from 'react-router-dom';
+import { Link , withRouter } from 'react-router-dom';
 import db from '../../database/db';
 
-const Header = () => {
+const Header = ( { history }) => {
     const logout = () => {
         db.auth().signOut().then(() => {
             localStorage.removeItem('uid');
+            history.push('/');
           }).catch((error) => {
             console.error(error);
           });     
@@ -25,4 +26,4 @@ const Header = () => {
         </nav>
     );
 };
-export default Header;
+export default withRouter(Header);

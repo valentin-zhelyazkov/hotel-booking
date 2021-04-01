@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import Header from './components/header/header';
 import Home from './components/home/home';
 import Footer from './components/footer/footer';
@@ -15,8 +15,11 @@ import './App.css';
 
 function App() {
   const [isLogged, setIsLogged] = useState(localStorage.getItem('uid'));
-
-  return (
+  //useEffect(() => {
+    //setIsLogged({ isLogged });
+  //}, [])
+  //console.log(isLogged);
+  return ( 
     <Router>
       <div className="App">
         {isLogged ? <Header /> : <HeaderWhenNotLogged />}
@@ -27,6 +30,7 @@ function App() {
               <Route path="/add" exact component={AddHotel} />
               <Route path="/profile" exact component={Profile} />
               <Route path="/details/:hotelId" exact component={Details} />
+              <Route path="/edit/:hotelId" exact component={Edit} />
             </Fragment> :
             <Fragment>
               <Route path="/login" exact component={Login} />
@@ -39,5 +43,6 @@ function App() {
     </Router>
   );
 }
+
 
 export default App;
