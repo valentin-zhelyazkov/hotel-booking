@@ -20,7 +20,7 @@ const Header = ( { history }) => {
                 </ul>
             </div>
             <div className="right-container">
-                <Link to="/profile" className="nav-btn">username</Link>
+                <Link to="/profile" className="nav-btn">Profile</Link>
                 <div className="nav-btn" onClick={logout}>Logout</div>
             </div>
         </nav>

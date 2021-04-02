@@ -1,10 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Fragment } from 'react';
 import './details.css';
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import db from '../../database/db';
 
-const Details = (match) => {
-    const hotelId = match.match.params.hotelId;
+const Details = ({
+    match,
+    history
+}) => {
+    const hotelId = match.params.hotelId;
     let [hotel, setHotel] = useState({});
 
     useEffect(() => {
@@ -15,15 +18,36 @@ const Details = (match) => {
             .then(curHotel => {
                 setHotel({ ...curHotel.data() });
             });
-    }, []);
-    
+    }, [hotelId]);
     const onDelete = (e) => {
         e.preventDefault();
         db.firestore()
-        .collection('hotels')
-        .doc(hotelId)
-        .delete();
+            .collection('hotels')
+            .doc(hotelId)
+            .delete();
+
+        history.push('/');
+
     }
+
+    const onBookHotel = (e) => {
+        e.preventDefault();
+        db.firestore().collection('hotels')
+            .doc(hotelId)
+            .get()
+            .then(curHotel => {
+                db.firestore()
+                    .collection('hotels')
+                    .doc(hotelId)
+                    .update({
+                        userWhoBookedHotel: [
+                            ...curHotel.data().userWhoBookedHotel,
+                            localStorage.getItem('uid')
+                        ]
+                    })
+            })
+    };
+
     return (
         <section id="viewhotelDetails">
             <h2>Details</h2>
@@ -37,14 +61,21 @@ const Details = (match) => {
                     </div>
                     <div>{hotel.city}</div>
                     <p><span >Free rooms: {hotel.freeRooms}</span> </p>
-                    <p><span className="green">You already have booked a room</span> </p>
-                    <Link to="/book" className="book">Book</Link>
-                    <Link to={`/edit/${hotelId}`} className="edit">Edit</Link>
-                    <button className="button, remove" onClick={onDelete}>Delete</button>
+
+                    {hotel.userId == localStorage.getItem('uid') ?
+                        <Fragment>
+                            <Link to={`/edit/${hotelId}`} className="edit">Edit</Link>
+                            <button className="button, remove" onClick={onDelete}>Delete</button>
+                        </Fragment> :
+                        <Fragment>
+                            <p><span className="green">You already have booked a room</span> </p>
+                            <Link to="/book" className="book" onClick={onBookHotel}>Book</Link>
+                        </Fragment>
+                    }
                 </div>
             </div>
         </section>
     );
 }
 
-export default Details;
+export default withRouter(Details);

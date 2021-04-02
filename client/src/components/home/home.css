@@ -37,3 +37,13 @@
     height: 250px;
     flex-basis: 25%;
 }
+
+.guest {
+    text-align: center;
+    color: white;
+    background-color: cornflowerblue;
+    padding: 40px;
+    position: absolute;
+    top: 40%;
+    left: 40%;
+}

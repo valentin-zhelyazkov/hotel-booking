@@ -1,6 +1,6 @@
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { useEffect, useState, memo } from 'react';
 import Header from './components/header/header';
 import Home from './components/home/home';
 import Footer from './components/footer/footer';
@@ -15,6 +15,8 @@ import './App.css';
 
 function App() {
   const [isLogged, setIsLogged] = useState(localStorage.getItem('uid'));
+
+
   //useEffect(() => {
     //setIsLogged({ isLogged });
   //}, [])
@@ -24,19 +26,14 @@ function App() {
       <div className="App">
         {isLogged ? <Header /> : <HeaderWhenNotLogged />}
         <Switch>
-          <Route path="/" exact component={Home} />
-          {isLogged ?
-            <Fragment>
-              <Route path="/add" exact component={AddHotel} />
-              <Route path="/profile" exact component={Profile} />
-              <Route path="/details/:hotelId" exact component={Details} />
-              <Route path="/edit/:hotelId" exact component={Edit} />
-            </Fragment> :
-            <Fragment>
-              <Route path="/login" exact component={Login} />
-              <Route path="/register" exact component={Register} />
-            </Fragment>
-          }
+          <Route path="/" exact component={Home}/>
+          { isLogged ? <Route path="/add" exact component={AddHotel} /> : null }
+          { isLogged ? <Route path="/profile" exact component={Profile} /> : null }
+          { isLogged ? <Route path="/details/:hotelId" exact component={Details} /> : null }
+          { isLogged ? <Route path="/edit/:hotelId" exact component={Edit} /> : null }
+          { !isLogged ? <Route path="/login" exact component={Login} /> : null }
+          { !isLogged ? <Route path="/register" exact component={Register} /> : null }
+          <Redirect to="/" />
         </Switch>
         <Footer />
       </div>

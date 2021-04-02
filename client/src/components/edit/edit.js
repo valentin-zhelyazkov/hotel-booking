@@ -18,11 +18,10 @@ const Edit = ({
             .then(curHotel => {
                 setHotel({ ...curHotel.data() });             
             });
-    }, []);
+    }, [hotelId]);
 
     const onSubmitChange = (e) => {
         e.preventDefault();
-        console.log(e.target.hotel.value);
         db.firestore()
         .collection('hotels')
         .doc(hotelId)

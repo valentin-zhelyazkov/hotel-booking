@@ -21,22 +21,25 @@ const Home = () => {
     useEffect(() => {
         fetchHotels();
     }, []);
-    
-   
-    
+
     return (
         <section id="viewCatalog" className="background-img">
             <div className="added-hotels">
-            {hotels.map((hotel, index) => (          
-                <Link to={`/details/${hotel.id}`} key={index} className="added-hotel">
-                    <img src={hotel.imageUrl} alt="" className="picture-added-hotel" />
-                    <h3>{hotel.city}</h3>
-                    <span>Free rooms: {hotel.freeRooms}</span>                   
-                </Link>
-            ))}         
+                {hotels.length ? hotels.map((hotel, index) => (
+                    <Link to={`/details/${hotel.id}`} key={index} className="added-hotel">
+                        <img src={hotel.imageUrl} alt="" className="picture-added-hotel" />
+                        <h3>{hotel.city}</h3>
+                        <span>Free rooms: {hotel.freeRooms}</span>
+                    </Link>
+                )) :
+                    <div className="guest">
+                        There are no Hotels found...
+                    </div>
+                }
             </div>
         </section>
     );
 }
 
 export default Home;
+

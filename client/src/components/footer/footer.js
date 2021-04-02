@@ -2,7 +2,7 @@ import './footer.css';
 
 const Footer = () => {
     return (
-        <footer>My footer</footer>
+        <footer>Hotel Booking</footer>
     );
 }
 

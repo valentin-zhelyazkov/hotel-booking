@@ -2,7 +2,9 @@ import './login.css'
 import db from '../../database/db';
 import { withRouter } from 'react-router-dom';
 
-const Login = ({ history }) => {
+const Login = ({
+    history
+}) => {
     const onLogin = (e) => {
         e.preventDefault();
         const email = e.target.email.value;

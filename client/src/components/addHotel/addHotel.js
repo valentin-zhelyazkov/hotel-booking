@@ -14,6 +14,7 @@ const AddHotel = memo(({
             freeRooms: e.target.freeRooms.value,
             imageUrl: e.target.imgUrl.value,
             userId: uid,
+            userWhoBookedHotel: []
         })
         history.push('/');        
     }
