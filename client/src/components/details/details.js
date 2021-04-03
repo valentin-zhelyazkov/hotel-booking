@@ -10,6 +10,7 @@ const Details = ({
     const hotelId = match.params.hotelId;
     let [hotel, setHotel] = useState({});
     const [booked, setIsBooked] = useState(false);
+    
     useEffect(() => {
         db.firestore()
             .collection('hotels')
@@ -19,6 +20,7 @@ const Details = ({
                 setHotel({ ...curHotel.data() });
             });
     }, [hotelId]);
+
     const onDelete = (e) => {
         e.preventDefault();
         db.firestore()
@@ -27,7 +29,6 @@ const Details = ({
             .delete();
 
         history.push('/');
-
     }
 
     const onBookHotel = (e) => {
@@ -45,9 +46,23 @@ const Details = ({
                             localStorage.getItem('uid')
                         ]
                     })
-            })           
-            
+            }) 
     };
+
+    useEffect(() => {
+       db.firestore()
+            .collection('hotels')
+            .doc(hotelId)
+            .get()
+            .then(curHotel => {
+                if(curHotel.data().userWhoBookedHotel.includes(localStorage.getItem('uid'))){
+                    setIsBooked(true);
+                } else {
+                    setIsBooked(false);
+                }
+                
+            })
+    },[booked]);
 
     return (
         <section id="viewhotelDetails">
@@ -69,8 +84,10 @@ const Details = ({
                             <button className="button, remove" onClick={onDelete}>Delete</button>
                         </Fragment> :
                         <Fragment>
-                            <p><span className="green">You already have booked a room</span> </p>
+                        {booked ? 
+                            <p><span className="green">You already have booked a room</span> </p> :
                             <Link to="/book" className="book" onClick={onBookHotel}>Book</Link>
+                        }     
                         </Fragment>
                     }
                 </div>
