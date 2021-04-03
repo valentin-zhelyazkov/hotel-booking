@@ -1,10 +1,13 @@
 import './login.css'
 import db from '../../database/db';
 import { withRouter } from 'react-router-dom';
+import { useState } from 'react';
+import LoginError from '../loginError/loginError';
 
 const Login = ({
     history
 }) => {
+    const [error, setError] = useState('');
     const onLogin = (e) => {
         e.preventDefault();
         const email = e.target.email.value;
@@ -18,6 +21,10 @@ const Login = ({
             .catch((error) => {
                 console.error(error);
             });
+            if(!localStorage.getItem('uid')){
+                setError('Wrong username or password!!!');
+                return;
+            }
     }
 
     return (
@@ -28,6 +35,7 @@ const Login = ({
                 <input type="text" id="email" name="email" placeholder="Email" />
                 <label htmlFor="password">Password:</label>
                 <input type="password" id="password" name="password" placeholder="Enter your Password" />
+                <LoginError className="input-error">{error}</LoginError>
                 <input type="submit" className="login" value="Login" />
             </form>
         </section>

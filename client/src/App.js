@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 
-import React, { useEffect, useState, memo } from 'react';
+import React, { useEffect, useState, useContext, createContext, useMemo } from 'react';
 import Header from './components/header/header';
 import Home from './components/home/home';
 import Footer from './components/footer/footer';
@@ -13,28 +13,36 @@ import Profile from './components/profile/profile'
 import HeaderWhenNotLogged from './components/headerWhenNotLogged/headerWhenNotLogged';
 import './App.css';
 
+
+
 function App() {
+  
   const [isLogged, setIsLogged] = useState(localStorage.getItem('uid'));
+  
+  const LoggedContext = createContext(isLogged);
+  
+  useEffect(() => {
+    setIsLogged(isLogged)
+  }, [isLogged]);
 
-
-  //useEffect(() => {
-    //setIsLogged({ isLogged });
-  //}, [])
-  //console.log(isLogged);
-  return ( 
+  const isLoggedInContext = useContext(LoggedContext);
+  
+  return (
     <Router>
       <div className="App">
-        {isLogged ? <Header /> : <HeaderWhenNotLogged />}
-        <Switch>
-          <Route path="/" exact component={Home}/>
-          { isLogged ? <Route path="/add" exact component={AddHotel} /> : null }
-          { isLogged ? <Route path="/profile" exact component={Profile} /> : null }
-          { isLogged ? <Route path="/details/:hotelId" exact component={Details} /> : null }
-          { isLogged ? <Route path="/edit/:hotelId" exact component={Edit} /> : null }
-          { !isLogged ? <Route path="/login" exact component={Login} /> : null }
-          { !isLogged ? <Route path="/register" exact component={Register} /> : null }
-          <Redirect to="/" />
-        </Switch>
+        <LoggedContext.Provider value={isLoggedInContext}>
+          {isLogged ? <Header /> : <HeaderWhenNotLogged />}
+          <Switch>
+            <Route path="/" exact component={Home} />
+            {isLogged ? <Route path="/add" exact component={AddHotel} /> : null}
+            {isLogged ? <Route path="/profile" exact component={Profile} /> : null}
+            {isLogged ? <Route path="/details/:hotelId" exact component={Details} /> : null}
+            {isLogged ? <Route path="/edit/:hotelId" exact component={Edit} /> : null}
+            {!isLogged ? <Route path="/login" exact component={Login} /> : null}
+            {!isLogged ? <Route path="/register" exact component={Register} /> : null}
+            <Redirect to="/" />
+          </Switch>
+        </LoggedContext.Provider>
         <Footer />
       </div>
     </Router>

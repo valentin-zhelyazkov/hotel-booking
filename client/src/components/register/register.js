@@ -1,16 +1,20 @@
 import './register.css'
 import db from '../../database/db';
 import { withRouter } from 'react-router-dom';
+import InputError from '../registerError/registerError';
+import { useState } from 'react';
 
 const Register = ({
     history
 }) => {
+    const [errorMesage, setErrorMessage] = useState('');
     const onRegister = (e) => {
         e.preventDefault();
         const email = e.target.email.value;
         const password = e.target.password.value;
         const repeatPassword = e.target.rePassword.value;
         if (password !== repeatPassword) {
+            setErrorMessage('Wrong repeat password!!!');
             return;
         }
         db.auth().createUserWithEmailAndPassword(email, password)
@@ -35,6 +39,7 @@ const Register = ({
                 <input type="password" id="password" name="password" placeholder="Password" />
                 <label htmlFor="rePassword">Repeat Password:</label>
                 <input type="password" id="rePassword" name="rePassword" placeholder="Repeat Password" />
+                <InputError>{errorMesage}</InputError>
                 <input type="submit" className="register" value="Register" />
             </form>
         </section>

@@ -2,7 +2,8 @@ import './header.css';
 import { Link , withRouter } from 'react-router-dom';
 import db from '../../database/db';
 
-const Header = ( { history }) => {
+const Header = ( { history } ) => {
+
     const logout = () => {
         db.auth().signOut().then(() => {
             localStorage.removeItem('uid');
