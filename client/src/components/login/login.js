@@ -1,31 +1,33 @@
 import './login.css'
 import db from '../../database/db';
 import { withRouter } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import LoginError from '../loginError/loginError';
+import LoggedContext from '../../contexts/logged-context';
 
 const Login = ({
     history
 }) => {
     const [error, setError] = useState('');
+    const { setIsLogged } = useContext(LoggedContext);
     const onLogin = (e) => {
         e.preventDefault();
         const email = e.target.email.value;
         const password = e.target.password.value;
+
         db.auth().signInWithEmailAndPassword(email, password)
             .then((userCredential) => {
                 const uid = userCredential.user.uid;
                 localStorage.setItem('uid', uid);
-                console.log(userCredential.user);
                 history.push('/');
+                setIsLogged(true);
             })
             .catch((error) => {
-                console.error(error);
-            });
-            if(!localStorage.getItem('uid')){
-                setError('Wrong username or password!!!');
-                return;
-            }
+                if (!localStorage.getItem('uid')) {
+                    setError('Wrong username or password!!!');
+                    return;
+                }
+            }); 
     }
 
     return (

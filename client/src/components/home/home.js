@@ -7,6 +7,7 @@ import React, { useState, useEffect } from 'react';
 
 const Home = () => {
     const [hotels, setHotels] = useState([]);
+    const [fetchedHotels, setFetchedHotels] = useState(false);
 
     const fetchHotels = async () => {
         const response = db.firestore().collection('hotels');
@@ -16,6 +17,7 @@ const Home = () => {
             id: hotel.id,
             ...hotel.data()
         })));
+        setFetchedHotels(true);
     }
 
     useEffect(() => {
@@ -33,7 +35,7 @@ const Home = () => {
                     </Link>
                 )) :
                     <div className="guest">
-                        There are no Hotels found...
+                        { !fetchedHotels ? "Loading..." : "There are no Hotels found..." }
                     </div>
                 }
             </div>

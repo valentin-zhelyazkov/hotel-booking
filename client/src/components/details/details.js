@@ -9,7 +9,7 @@ const Details = ({
 }) => {
     const hotelId = match.params.hotelId;
     let [hotel, setHotel] = useState({});
-
+    const [booked, setIsBooked] = useState(false);
     useEffect(() => {
         db.firestore()
             .collection('hotels')
@@ -45,7 +45,8 @@ const Details = ({
                             localStorage.getItem('uid')
                         ]
                     })
-            })
+            })           
+            
     };
 
     return (

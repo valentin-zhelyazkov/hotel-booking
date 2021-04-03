@@ -2,12 +2,14 @@ import './register.css'
 import db from '../../database/db';
 import { withRouter } from 'react-router-dom';
 import InputError from '../registerError/registerError';
-import { useState } from 'react';
+import { useState,useContext } from 'react';
+import LoggedContext from '../../contexts/logged-context';
 
 const Register = ({
     history
 }) => {
     const [errorMesage, setErrorMessage] = useState('');
+    const { setIsLogged } = useContext(LoggedContext);
     const onRegister = (e) => {
         e.preventDefault();
         const email = e.target.email.value;
@@ -22,6 +24,7 @@ const Register = ({
                 const uid = userCredential.user.uid;
                 localStorage.setItem('uid', uid);
                 history.push('/');
+                setIsLogged(true);
             })
             .catch((error) => {
                 console.error(error);

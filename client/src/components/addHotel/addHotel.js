@@ -8,6 +8,7 @@ const AddHotel = memo(({
     const onHotelSubmit = (e) => {
         e.preventDefault();
         const uid = localStorage.getItem('uid');
+
         db.firestore().collection("hotels").add({           
             hotelName: e.target.hotel.value,
             city: e.target.city.value,
@@ -18,7 +19,6 @@ const AddHotel = memo(({
         })
         history.push('/');        
     }
-
 
     return (
         <section id="viewAddhotel">
@@ -32,7 +32,6 @@ const AddHotel = memo(({
                 <input type="number" id="free-rooms" name="freeRooms" placeholder="Free rooms" />
                 <label htmlFor="imgUrl">Image:</label>
                 <input type="text" id="imgUrl" name="imgUrl" placeholder="https://" />
-
                 <input type="submit" className="create" value="Add" />
             </form>
         </section>

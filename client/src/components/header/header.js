@@ -1,17 +1,22 @@
 import './header.css';
+import { useContext } from 'react';
 import { Link , withRouter } from 'react-router-dom';
+import LoggedContext from '../../contexts/logged-context';
 import db from '../../database/db';
 
 const Header = ( { history } ) => {
-
+    const { setIsLogged } = useContext(LoggedContext);
+    
     const logout = () => {
         db.auth().signOut().then(() => {
             localStorage.removeItem('uid');
             history.push('/');
+            setIsLogged(false);
           }).catch((error) => {
             console.error(error);
           });     
     }
+
     return (
         <nav>
             <div className="left-container">

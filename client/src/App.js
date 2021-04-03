@@ -11,26 +11,16 @@ import Details from './components/details/details';
 import Edit from './components/edit/edit';
 import Profile from './components/profile/profile'
 import HeaderWhenNotLogged from './components/headerWhenNotLogged/headerWhenNotLogged';
+import LoggedContext from './contexts/logged-context';
 import './App.css';
 
-
-
 function App() {
-  
   const [isLogged, setIsLogged] = useState(localStorage.getItem('uid'));
-  
-  const LoggedContext = createContext(isLogged);
-  
-  useEffect(() => {
-    setIsLogged(isLogged)
-  }, [isLogged]);
 
-  const isLoggedInContext = useContext(LoggedContext);
-  
   return (
     <Router>
       <div className="App">
-        <LoggedContext.Provider value={isLoggedInContext}>
+        <LoggedContext.Provider value={{ isLogged, setIsLogged }}>
           {isLogged ? <Header /> : <HeaderWhenNotLogged />}
           <Switch>
             <Route path="/" exact component={Home} />
