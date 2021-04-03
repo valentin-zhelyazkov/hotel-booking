@@ -16,6 +16,7 @@ const Login = ({
             .then((userCredential) => {
                 const uid = userCredential.user.uid;
                 localStorage.setItem('uid', uid);
+                console.log(userCredential.user);
                 history.push('/');
             })
             .catch((error) => {
