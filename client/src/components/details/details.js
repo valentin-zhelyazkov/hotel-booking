@@ -1,7 +1,8 @@
-import { useEffect, useState, Fragment } from 'react';
+import { useEffect, useState, Fragment, useContext } from 'react';
 import './details.css';
 import { Link, withRouter } from "react-router-dom";
 import db from '../../database/db';
+import LoggedContext from '../../contexts/logged-context';
 
 const Details = ({
     match,
@@ -10,7 +11,8 @@ const Details = ({
     const hotelId = match.params.hotelId;
     let [hotel, setHotel] = useState({});
     const [booked, setIsBooked] = useState(false);
-    
+    const { setIsLogged } = useContext(LoggedContext);
+
     useEffect(() => {
         db.firestore()
             .collection('hotels')
@@ -44,9 +46,13 @@ const Details = ({
                         userWhoBookedHotel: [
                             ...curHotel.data().userWhoBookedHotel,
                             localStorage.getItem('uid')
+                            
                         ]
                     })
+                    history.push('/');
+                    setIsLogged(true);
             }) 
+            
     };
 
     useEffect(() => {

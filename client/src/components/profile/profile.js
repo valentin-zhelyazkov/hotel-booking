@@ -7,6 +7,7 @@ import LoggedContext from '../../contexts/logged-context';
 
 const Profile = ({ history }) => {
     let [email, setEmail] = useState('');
+    let [bookedHotels, setBookedHotels] = useState([]);
     const { setIsLogged } = useContext(LoggedContext);
     useEffect(() => {
         db.auth().currentUser
@@ -16,16 +17,28 @@ const Profile = ({ history }) => {
             });
 
     }, []);
+    useEffect(() => {
+        db.firestore().collection('hotels').get().then((hotels) => {
+            hotels.forEach(hotel => {
+                if (hotel.data().userWhoBookedHotel.includes(localStorage.getItem('uid'))) {
+                    setBookedHotels({
+                        hotelName: hotel.data().hotelName,
+                    });
+                }
+
+            })
+        })
+    }, []);
 
     const onClickDelete = (e) => {
         e.preventDefault();
-        db.auth().currentUser.delete().then(function() {
+        db.auth().currentUser.delete().then(function () {
             localStorage.removeItem('uid');
             history.push('/');
             setIsLogged(false);
-          }).catch(function(error) {
+        }).catch(function (error) {
             console.error(error);
-          });
+        });
     }
 
     return (
@@ -36,6 +49,13 @@ const Profile = ({ history }) => {
                 <div className="flex">
                     <p>Email: </p>
                     <p>{email}</p>
+                </div>
+                <div class="flex">
+                    <p>Reservations: </p>
+                    <p>{Object.values(bookedHotels).map(hotel => {
+                        <span>{hotel}</span>
+                    })}
+                    </p>
                 </div>
                 <button className="delete" onClick={onClickDelete}>Delete Profile</button>
             </div>

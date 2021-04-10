@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 
-import React, { useEffect, useState, useContext, createContext, useMemo } from 'react';
+import React, { useState } from 'react';
 import Header from './components/header/header';
 import Home from './components/home/home';
 import Footer from './components/footer/footer';
